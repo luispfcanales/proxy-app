@@ -18,15 +18,18 @@ type ProxyHandler struct {
 	routes map[string]*httputil.ReverseProxy
 }
 
-const HostLocal = "192.168.254.155"
+const (
+	HOST_LOCAL  = "192.168.254.155"
+	PORT_CAMPUS = "8014"
+)
 
 func main() {
 	// Define all your routes here
 	routes := []RouteConfig{
-		{Host: "app.gopher.wtf", Target: "200.37.144.19", Port: "8015"},
-		{Host: "192.168.254.155", Target: HostLocal, Port: "8014"},
-		//{Host: "200.37.144.19", Target: HostLocal, Port: "8014"},
-		// Add more routes as needed
+		{Host: "app.gopher.wtf", Target: HOST_LOCAL, Port: "8015"},
+		//ww.gopher.wtf", Target: HOST_LOCAL, Port: PORT_CAMPUS},
+		{Host: "200.37.144.19", Target: HOST_LOCAL, Port: PORT_CAMPUS},
+		{Host: HOST_LOCAL, Target: HOST_LOCAL, Port: PORT_CAMPUS},
 	}
 
 	// Create proxy handler with routes
