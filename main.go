@@ -27,7 +27,7 @@ func main() {
 	// Define all your routes here
 	routes := []RouteConfig{
 		{Host: "app.gopher.wtf", Target: HOST_LOCAL, Port: "8015"},
-		//ww.gopher.wtf", Target: HOST_LOCAL, Port: PORT_CAMPUS},
+		{Host: "confericis.luispf.org", Target: HOST_LOCAL, Port: "8015"},
 		{Host: "200.37.144.19", Target: HOST_LOCAL, Port: PORT_CAMPUS},
 		{Host: HOST_LOCAL, Target: HOST_LOCAL, Port: PORT_CAMPUS},
 	}
