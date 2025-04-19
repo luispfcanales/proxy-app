@@ -12,6 +12,7 @@ type RouteConfig struct {
 	Host   string
 	Target string
 	Port   string
+	SSL    bool
 }
 
 type ProxyHandler struct {
@@ -27,7 +28,7 @@ func main() {
 	// Define all your routes here
 	routes := []RouteConfig{
 		{Host: "app.gopher.wtf", Target: HOST_LOCAL, Port: "8015"},
-		{Host: "confericis.luispf.org", Target: HOST_LOCAL, Port: "8015"},
+		{Host: "confericis.luispf.org", Target: HOST_LOCAL, Port: "8015", SSL: true},
 		{Host: "200.37.144.19", Target: HOST_LOCAL, Port: PORT_CAMPUS},
 		{Host: HOST_LOCAL, Target: HOST_LOCAL, Port: PORT_CAMPUS},
 	}
@@ -43,12 +44,23 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
-		proxyHandler.routes[route.Host] = httputil.NewSingleHostReverseProxy(target)
+		proxy := httputil.NewSingleHostReverseProxy(target)
+
+		// Add headers for Cloudflare
+		originalDirector := proxy.Director
+		proxy.Director = func(req *http.Request) {
+			originalDirector(req)
+			req.Header.Set("X-Forwarded-Host", req.Host)
+			req.Header.Set("X-Forwarded-Proto", "https")
+			req.Header.Set("X-Real-IP", req.RemoteAddr)
+		}
+
+		proxyHandler.routes[route.Host] = proxy
 	}
 
 	http.Handle("/", proxyHandler)
-	err := http.ListenAndServe(":80", nil)
-	if err != nil {
+	log.Printf("Starting server on :80")
+	if err := http.ListenAndServe(":80", nil); err != nil {
 		panic(err)
 	}
 }
