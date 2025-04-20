@@ -20,17 +20,17 @@ type ProxyHandler struct {
 }
 
 const (
-	HOST_LOCAL  = "192.168.254.155"
-	PORT_CAMPUS = "8014"
+	HOST_LOCAL = "172.31.91.58"
+	// PORT_CAMPUS = "8001"
 )
 
 func main() {
 	// Define all your routes here
 	routes := []RouteConfig{
-		{Host: "app.gopher.wtf", Target: HOST_LOCAL, Port: "8015"},
-		{Host: "confericis.luispf.org", Target: HOST_LOCAL, Port: "8015", SSL: true},
-		{Host: "200.37.144.19", Target: HOST_LOCAL, Port: PORT_CAMPUS},
-		{Host: HOST_LOCAL, Target: HOST_LOCAL, Port: PORT_CAMPUS},
+		// {Host: "app.gopher.wtf", Target: HOST_LOCAL, Port: "8015"},
+		// {Host: "confericis.luispf.org", Target: HOST_LOCAL, Port: "8015", SSL: true},
+		//{Host: "200.37.144.19", Target: HOST_LOCAL, Port: PORT_CAMPUS},
+		{Host: "3.88.173.137", Target: HOST_LOCAL, Port: "8001"},
 	}
 
 	// Create proxy handler with routes
