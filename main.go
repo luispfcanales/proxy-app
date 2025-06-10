@@ -12,7 +12,6 @@ type RouteConfig struct {
 	Host   string
 	Target string
 	Port   string
-	SSL    bool
 }
 
 type ProxyHandler struct {
@@ -22,14 +21,16 @@ type ProxyHandler struct {
 const (
 	HOST_LOCAL = "172.31.91.58"
 	// PORT_CAMPUS = "8001"
-	CONFERICIS_PORT = "8001"
+	CONFERICIS_PORT     = "8001"
+	API_CONFERICIS_PORT = "8002"
 )
 
 func main() {
 	// Define all your routes here
 	routes := []RouteConfig{
 		// {Host: "app.gopher.wtf", Target: HOST_LOCAL, Port: "8015"},
-		{Host: "confericis.luispf.org", Target: HOST_LOCAL, Port: CONFERICIS_PORT, SSL: true},
+		{Host: "api.luispf.org", Target: HOST_LOCAL, Port: API_CONFERICIS_PORT},
+		{Host: "confericis.luispf.org", Target: HOST_LOCAL, Port: CONFERICIS_PORT},
 		{Host: "35.173.114.173", Target: HOST_LOCAL, Port: CONFERICIS_PORT},
 	}
 
