@@ -54,6 +54,8 @@ func main() {
 			req.Header.Set("X-Forwarded-Host", req.Host)
 			req.Header.Set("X-Forwarded-Proto", "https")
 			req.Header.Set("X-Real-IP", req.RemoteAddr)
+			// Preserva las cabeceras CORS
+			req.Header.Del("Origin") // Deja que el backend maneje el CORS
 		}
 
 		proxyHandler.routes[route.Host] = proxy
