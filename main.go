@@ -23,12 +23,14 @@ const (
 	// PORT_CAMPUS = "8001"
 	CONFERICIS_PORT     = "8001"
 	API_CONFERICIS_PORT = "8002"
+	API_MUAC_PORT       = "8003"
 )
 
 func main() {
 	// Define all your routes here
 	routes := []RouteConfig{
 		// {Host: "app.gopher.wtf", Target: HOST_LOCAL, Port: "8015"},
+		{Host: "muac.luispf.org", Target: HOST_LOCAL, Port: API_MUAC_PORT},
 		{Host: "api.luispf.org", Target: HOST_LOCAL, Port: API_CONFERICIS_PORT},
 		{Host: "confericis.luispf.org", Target: HOST_LOCAL, Port: CONFERICIS_PORT},
 		{Host: "35.173.114.173", Target: HOST_LOCAL, Port: CONFERICIS_PORT},
